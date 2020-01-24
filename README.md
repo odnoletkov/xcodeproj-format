@@ -12,6 +12,10 @@ to appear later in commits. Use this tool to keep the file normalized:
 * After modifying project file manually or with other tools
 * Detect and reject misformatted or corrupted project files in CI
 
+# Install
+
+    brew install odnoletkov/formulae/xcodeproj-format
+
 # Build
 
     git clone https://github.com/odnoletkov/xcodeproj-format
