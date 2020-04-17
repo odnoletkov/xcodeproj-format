@@ -44,7 +44,15 @@ int main(int argc, char *const *argv) { @autoreleasepool {
     }
     
     NSCAssert(dlopen("IDEFoundation.framework/IDEFoundation", RTLD_NOW), @"%s", dlerror());
-    
+
+    [[NSBundle bundleWithPath:
+      [[[[[NSString stringWithCString:getenv("DYLD_FRAMEWORK_PATH") encoding:NSUTF8StringEncoding]
+          componentsSeparatedByString:@":"]
+         firstObject]
+        stringByDeletingLastPathComponent]
+       stringByAppendingPathComponent:@"PlugIns/IDEIntentBuilderCore.ideplugin"]]
+     loadAndReturnError:nil];
+
     BOOL(*IDEInitialize)(int initializationOptions, NSError **error) = dlsym(RTLD_DEFAULT, "IDEInitialize");
     NSCParameterAssert(IDEInitialize);
     NSCParameterAssert(IDEInitialize(1, nil));
